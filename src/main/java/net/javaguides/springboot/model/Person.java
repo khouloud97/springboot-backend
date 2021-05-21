@@ -20,19 +20,29 @@ public class Person {
 	private String lastname;
 	@Column(name="email_id") 
 	private String emailId;
+	@Column(name="url") 
+	private String url;
+
 	public long getId() {
 		return id;
 	}
 	public Person() {}
 	
-	public Person(String firstname, String lastname, String emailId) {
+	public Person(String firstname, String lastname, String emailId,String url) {
 		super();
 		this.firstname = firstname;
 		this.lastname = lastname;
 		this.emailId = emailId;
+		this.url=url;
 	}
 
 
+	public String getUrl() {
+		return url;
+	}
+	public void setUrl(String url) {
+		this.url = url;
+	}
 	public String getEmailId() {
 		return emailId;
 	}

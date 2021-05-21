@@ -62,6 +62,7 @@ public  ResponseEntity<Person> updatePersonbyId(@PathVariable Long id, @RequestB
 	person.setFirstname(persondet.getFirstname());
 	person.setLastname(persondet.getLastname());
 	person.setEmailId(persondet.getEmailId());
+	person.setUrl(persondet.getUrl());
 	Person updatedPerson=personRepository.save(person);
 	return ResponseEntity.ok(updatedPerson);
 
