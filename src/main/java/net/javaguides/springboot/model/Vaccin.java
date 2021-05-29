@@ -1,16 +1,21 @@
 package net.javaguides.springboot.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="persons")
-public class Person {
-	
+@Table(name="Vaccins")
+public class Vaccin {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
@@ -18,45 +23,31 @@ public class Person {
 	private String firstname;
 	@Column(name="last_name")
 	private String lastname;
-	@Column(name="email_id") 
-	private String emailId;
-	@Column(name="url") 
-	private String url;
-	@Column(name="cp_fk") 
-	private long cp_fk;
-	public long getCp_fk() {
-		return cp_fk;
-	}
-	public void setCp_fk(long cp_fk) {
-		this.cp_fk = cp_fk;
-	}
+	@Column(name="phone") 
+	private long  phone;
+ 
+@OneToMany(targetEntity = Person.class,cascade = CascadeType.ALL)
+@JoinColumn(name="cp_fk",referencedColumnName = "id")
+private List<Person> persons;
 	public long getId() {
 		return id;
 	}
+	public Vaccin() {}
 	
-	public Person() {}
-	
-	public Person(String firstname, String lastname, String emailId,String url,long cp_fk) {
+	public Vaccin(String firstname, String lastname, String emailId ,long phone) {
 		super();
 		this.firstname = firstname;
 		this.lastname = lastname;
-		this.emailId = emailId;
-		this.url=url;
-		this.cp_fk=cp_fk;
-	}
+		this.phone =phone;
+ 	}
 
 
-	public String getUrl() {
-		return url;
+   
+	public long getPhone() {
+		return phone;
 	}
-	public void setUrl(String url) {
-		this.url = url;
-	}
-	public String getEmailId() {
-		return emailId;
-	}
-	public void setEmailId(String emailId) {
-		this.emailId = emailId;
+	public void setPhone(long phone) {
+		this.phone = phone;
 	}
 	public void setId(long id) {
 		this.id = id;

@@ -14,79 +14,76 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import net.javaguides.springboot.exception.ResourceNotFoundException;
-import net.javaguides.springboot.model.Person;
-import net.javaguides.springboot.repository.PersonRepository;
-
+import net.javaguides.springboot.model.Vaccin;
+import net.javaguides.springboot.repository.VaccinRepository;
+ 
 @RestController
 @RequestMapping("/api/v1")
-public class PersonController {
- 	
-	
+public class VaccinController {
+
+
 	@Autowired
-	private PersonRepository personRepository;
-	
+	private VaccinRepository vaccinRepository;
+
 @CrossOrigin(origins = "http://localhost:4200")
-@GetMapping("/persons")	
-public List<Person> getAllPersons(){		
-		return personRepository.findAll();
+@GetMapping("/vaccins")	public List<Vaccin> getAlladmins(){
+		return vaccinRepository.findAll();
 	}
-	
+
 	//new
 @CrossOrigin(origins = "http://localhost:4200")
-@PostMapping("/persons")
-	public Person createPerson( @RequestBody Person person) {
-		return personRepository.save(person);
+@PostMapping("/vaccins")
+	public Vaccin createvaccin( @RequestBody Vaccin vaccin) {
+		return vaccinRepository.save(vaccin);
 	}
-	
+
 	//get
 
 @CrossOrigin(origins = "http://localhost:4200")
-@GetMapping("/persons/{id}")
-public  ResponseEntity<Person> getPersonbyId( @PathVariable Long id) {
-Person person=personRepository.findById(id)
+@GetMapping("/vaccins/{id}")
+public  ResponseEntity<Vaccin> getadminbyId( @PathVariable Long id) {
+Vaccin vaccin=vaccinRepository.findById(id)
 .orElseThrow(() ->
 new ResourceNotFoundException("Not Found" +id));
-return ResponseEntity.ok(person);
+return ResponseEntity.ok(vaccin);
 }
 
 
  //update
 @CrossOrigin(origins = "http://localhost:4200")
-@PutMapping("/persons/{id}")
-public  ResponseEntity<Person> updatePersonbyId(@PathVariable Long id, @RequestBody Person persondet) {
-	Person person=personRepository.findById(id)
+@PutMapping("/vaccins/{id}")
+public  ResponseEntity<Vaccin> updateadminbyId(@PathVariable Long id, @RequestBody Vaccin admindet) {
+	Vaccin  vaccin=vaccinRepository.findById(id)
 			.orElseThrow(() ->
 			new ResourceNotFoundException("Not Found" +id));
-	person.setFirstname(persondet.getFirstname());
-	person.setLastname(persondet.getLastname());
-	person.setEmailId(persondet.getEmailId());
-	person.setUrl(persondet.getUrl());
-	person.setCp_fk(persondet.getCp_fk());
-	Person updatedPerson=personRepository.save(person);
-	return ResponseEntity.ok(updatedPerson);
+	vaccin.setFirstname(admindet.getFirstname());
+	vaccin.setLastname(admindet.getLastname());
+	vaccin.setPhone(admindet.getPhone());
+	Vaccin updatedadmin=vaccinRepository.save(vaccin);
+	return ResponseEntity.ok(updatedadmin);
 
 	}
 
 //DElete
 @CrossOrigin(origins = "http://localhost:4200")
-@DeleteMapping("/persons/{id}")
-public ResponseEntity<Map<String,Boolean>> deletePerson(@PathVariable Long id)
+@DeleteMapping("/vaccins/{id}")
+public ResponseEntity<Map<String,Boolean>> deleteadmin(@PathVariable Long id)
 {
-	Person person=personRepository.findById(id)
+Vaccin  vaccin=vaccinRepository.findById(id)
 			.orElseThrow(() ->
-			new ResourceNotFoundException("Not Found" +id));	
-	personRepository.delete(person);
+			new ResourceNotFoundException("Not Found" +id));
+vaccinRepository.delete(vaccin);
 	Map<String,Boolean> response=new HashMap<>();
 	response.put("deleted", Boolean.TRUE);
      return ResponseEntity.ok(response);
 
 
 }
- 
 
-		
+
+
+
 }
