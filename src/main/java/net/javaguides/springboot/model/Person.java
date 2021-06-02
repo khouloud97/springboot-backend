@@ -24,15 +24,6 @@ public class Person {
 	private String url;
 	@Column(name="cp_fk") 
 	private long cp_fk;
-	public long getCp_fk() {
-		return cp_fk;
-	}
-	public void setCp_fk(long cp_fk) {
-		this.cp_fk = cp_fk;
-	}
-	public long getId() {
-		return id;
-	}
 	
 	public Person() {}
 	
@@ -44,7 +35,16 @@ public class Person {
 		this.url=url;
 		this.cp_fk=cp_fk;
 	}
-
+	public long getCp_fk() {
+		return cp_fk;
+	}
+	public void setCp_fk(long cp_fk) {
+		this.cp_fk = cp_fk;
+	}
+	public long getId() {
+		return id;
+	}
+	
 
 	public String getUrl() {
 		return url;

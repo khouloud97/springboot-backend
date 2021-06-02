@@ -29,7 +29,7 @@ public class VaccinController {
 	private VaccinRepository vaccinRepository;
 
 @CrossOrigin(origins = "http://localhost:4200")
-@GetMapping("/vaccins")	public List<Vaccin> getAlladmins(){
+@GetMapping("/vaccins")	public List<Vaccin> getAllvaccins(){
 		return vaccinRepository.findAll();
 	}
 
@@ -44,7 +44,7 @@ public class VaccinController {
 
 @CrossOrigin(origins = "http://localhost:4200")
 @GetMapping("/vaccins/{id}")
-public  ResponseEntity<Vaccin> getadminbyId( @PathVariable Long id) {
+public  ResponseEntity<Vaccin> getvaccinbyId( @PathVariable Long id) {
 Vaccin vaccin=vaccinRepository.findById(id)
 .orElseThrow(() ->
 new ResourceNotFoundException("Not Found" +id));
@@ -55,22 +55,22 @@ return ResponseEntity.ok(vaccin);
  //update
 @CrossOrigin(origins = "http://localhost:4200")
 @PutMapping("/vaccins/{id}")
-public  ResponseEntity<Vaccin> updateadminbyId(@PathVariable Long id, @RequestBody Vaccin admindet) {
+public  ResponseEntity<Vaccin> updatevaccinbyId(@PathVariable Long id, @RequestBody Vaccin vaccindet) {
 	Vaccin  vaccin=vaccinRepository.findById(id)
 			.orElseThrow(() ->
 			new ResourceNotFoundException("Not Found" +id));
-	vaccin.setFirstname(admindet.getFirstname());
-	vaccin.setLastname(admindet.getLastname());
-	vaccin.setPhone(admindet.getPhone());
-	Vaccin updatedadmin=vaccinRepository.save(vaccin);
-	return ResponseEntity.ok(updatedadmin);
+	vaccin.setFirstname(vaccindet.getFirstname());
+	vaccin.setLastname(vaccindet.getLastname());
+	vaccin.setPhone(vaccindet.getPhone());
+	Vaccin updatedvaccin=vaccinRepository.save(vaccin);
+	return ResponseEntity.ok(updatedvaccin);
 
 	}
 
 //DElete
 @CrossOrigin(origins = "http://localhost:4200")
 @DeleteMapping("/vaccins/{id}")
-public ResponseEntity<Map<String,Boolean>> deleteadmin(@PathVariable Long id)
+public ResponseEntity<Map<String,Boolean>> deletevaccin(@PathVariable Long id)
 {
 Vaccin  vaccin=vaccinRepository.findById(id)
 			.orElseThrow(() ->

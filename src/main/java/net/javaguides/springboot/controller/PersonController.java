@@ -6,7 +6,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
+	import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -87,6 +87,10 @@ public ResponseEntity<Map<String,Boolean>> deletePerson(@PathVariable Long id)
 
 }
  
-
+@CrossOrigin(origins = "http://localhost:4200")
+@GetMapping("/persons/cp_fk={id}")	
+public List<Person> findbyvaccin(@PathVariable Long id){		
+		return personRepository.findbyvaccin(id);
+	}
 		
 }
